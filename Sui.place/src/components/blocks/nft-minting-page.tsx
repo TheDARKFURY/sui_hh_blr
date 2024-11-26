@@ -21,7 +21,6 @@ import {
   Image as ImageIcon,
   ChevronLeft,
 } from "lucide-react";
-import { useTronLink } from "@/components/contexts/tronlink-context";
 import Link from "next/link";
 
 declare global {
@@ -31,7 +30,8 @@ declare global {
 }
 
 export function NftMintingPage() {
-  const { isConnected, address } = useTronLink();
+  const isConnected = false;
+  const address ="";
   const [nftName, setNftName] = useState("");
   const [nftDescription, setNftDescription] = useState("");
   const [file, setFile] = useState<File | null>(null);

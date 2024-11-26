@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Loader2 } from "lucide-react";
-import { useTronLink } from "../contexts/tronlink-context";
 import TronWeb from "tronweb";
 
 declare global {
@@ -22,7 +21,8 @@ declare global {
 }
 
 export default function NFTMint() {
-  const { isConnected, address } = useTronLink();
+  const isConnected = false;
+  const address ="";
   const [nftName, setNftName] = useState("");
   const [nftDescription, setNftDescription] = useState("");
   const [file, setFile] = useState<File | null>(null);

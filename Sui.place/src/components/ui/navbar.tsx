@@ -6,6 +6,7 @@ import StoreDashboardSheet from "../buttons/store-dashboard-sheet";
 import { Button } from "./button";
 import Link from "next/link";
 import { Input } from "./input";
+
 import {
   Dialog,
   DialogTrigger,
@@ -24,7 +25,6 @@ import TronlinkCard from "../blocks/tronlink-card";
 import { DialogHeader } from "./dialog";
 // import cartItems from "@/components/assets/database";
 import { Label } from "./label";
-import { useTronLink } from "../contexts/tronlink-context";
 import { useCart } from "../contexts/cart-context";
 import { Alert } from "./alert";
 const FASTAPI_URL = process.env.FASTAPI_URL;
@@ -42,9 +42,10 @@ const NavBar = () => {
   const [navCart, setCart] = useState<typeof cart>([]);
   const [alert, setAlert] = useState<ReactNode>(<React.Fragment />);
 
-  const { isConnected, address } = useTronLink();
+  const isConnected = false;
+  const address ="";
 
-  // Placeholder login function
+
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Login attempted with:", loginEmail, loginPassword);
@@ -168,6 +169,7 @@ const NavBar = () => {
                 >
                   Communities
                 </Link>
+            
               </div>
             </div>
             <div className="flex items-center space-x-4">
@@ -181,6 +183,7 @@ const NavBar = () => {
                   <Button variant="outline" size="icon">
                     <SearchIcon className="h-4 w-4" />
                   </Button>
+                  
                 </div>
               </div>
               <DropdownMenu>

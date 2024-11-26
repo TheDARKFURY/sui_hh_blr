@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
-import { TronLinkProvider } from "@/components/contexts/tronlink-context";
 import { CartProvider } from "@/components/contexts/cart-context";
 import { ToastProvider } from "@/components/ui/toast";
 import { GameProductsProvider } from "@/components/contexts/developer-game-products-context";
-
+import { SuiLinkProvider } from "@/components/contexts/suilink-context";
 
 export const metadata: Metadata = {
   title: "MintyPlay",
@@ -19,15 +17,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`antialiased`}
-      >
+      <body className={`antialiased`}>
         <GameProductsProvider>
-          <TronLinkProvider>
+          <SuiLinkProvider>
             <ToastProvider>
               <CartProvider>{children}</CartProvider>
             </ToastProvider>
-          </TronLinkProvider>
+          </SuiLinkProvider>
         </GameProductsProvider>
       </body>
     </html>

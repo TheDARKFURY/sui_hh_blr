@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { ConnectButton } from '@mysten/dapp-kit';
 import {
   Card,
   CardContent,
@@ -12,7 +13,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
-import { useTronLink } from "../contexts/tronlink-context";
 
 declare global {
   interface Window {
@@ -21,7 +21,9 @@ declare global {
 }
 
 export default function TronLinkCard() {
-  const { isConnected, setConnection } = useTronLink();
+  const [connection, setConnection] = useState(false);
+  const isConnected = false;
+  const address ="";
   const [error, setError] = useState<string | null>(null);
   const [myDetails, setMyDetails] = useState({
     name: "none",
@@ -54,39 +56,7 @@ export default function TronLinkCard() {
           tempBalance.balance = 0;
         }
 
-        //checking if any frozen balance exists
-        // if (
-        //   !tempBalance.frozen &&
-        //   !tempBalance.account_resource.frozen_balance_for_energy
-        // ) {
-        //   tempFrozenBalance = 0;
-        // } else {
-        //   if (
-        //     tempBalance.frozen &&
-        //     tempBalance.account_resource.frozen_balance_for_energy
-        //   ) {
-        //     tempFrozenBalance =
-        //       tempBalance.frozen[0].frozen_balance +
-        //       tempBalance.account_resource.frozen_balance_for_energy
-        //         .frozen_balance;
-        //   }
-        //   if (
-        //     tempBalance.frozen &&
-        //     !tempBalance.account_resource.frozen_balance_for_energy
-        //   ) {
-        //     tempFrozenBalance = tempBalance.frozen[0].frozen_balance;
-        //   }
-        //   if (
-        //     !tempBalance.frozen &&
-        //     tempBalance.account_resource.frozen_balance_for_energy
-        //   ) {
-        //     tempFrozenBalance =
-        //       tempBalance.account_resource.frozen_balance_for_energy
-        //         .frozen_balance;
-        //   }
-        // }
-
-        //we have wallet and we are logged in
+      
         setError("");
         setMyDetails({
           name: window.tronWeb.defaultAddress.name,
@@ -181,8 +151,8 @@ export default function TronLinkCard() {
   return (
     <Card className="w-full border-0 shadow-none">
       <CardHeader>
-        <CardTitle>TronLink Connection</CardTitle>
-        <CardDescription>Connect your TronLink wallet</CardDescription>
+        <CardTitle>Sui Connection</CardTitle>
+        <CardDescription>Connect your Sui wallet</CardDescription>
       </CardHeader>
       <CardContent>
         {error && (
@@ -204,17 +174,11 @@ export default function TronLinkCard() {
             <p className="break-all">{myDetails.address}</p>
           </div>
         ) : (
-          <p>Not connected to TronLink</p>
+          <p>Not connected to Sui Wallet</p>
         )}
       </CardContent>
       <CardFooter>
-        <Button
-          onClick={connectWallet}
-          disabled={isConnected}
-          className="w-full"
-        >
-          {isConnected ? "Connected" : "Connect to TronLink"}
-        </Button>
+        <ConnectButton />
       </CardFooter>
     </Card>
   );
