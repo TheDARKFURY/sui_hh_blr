@@ -5,15 +5,19 @@ import {
   SuiClientProvider,
   WalletProvider,
 } from "@mysten/dapp-kit";
-import { getFullnodeUrl, type SuiClientOptions } from "@mysten/sui.js/client";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "@mysten/dapp-kit/dist/index.css";
+import { getFullnodeUrl, type SuiClientOptions } from "@mysten/sui/client";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { registerStashedWallet } from "@mysten/zksend";
 
 const { networkConfig } = createNetworkConfig({
-  testnet: { url: getFullnodeUrl("testnet") },
   mainnet: { url: getFullnodeUrl("mainnet") },
 });
 const queryClient = new QueryClient();
+
+const connect = registerStashedWallet("Baskt", {
+  origin: "https://getstashed.com",
+});
 
 interface SuiLinkContextType {
   isConnected: boolean;
@@ -50,8 +54,15 @@ export const SuiLinkProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <SuiLinkContext.Provider value={{ isConnected, address, setConnection }}>
       <QueryClientProvider client={queryClient}>
-        <SuiClientProvider networks={networkConfig} defaultNetwork="testnet">
-          <WalletProvider>{children}</WalletProvider>
+        <SuiClientProvider networks={networkConfig} defaultNetwork="mainnet">
+          <WalletProvider
+            autoConnect={true}
+            stashedWallet={{
+              name: "Baskt",
+            }}
+          >
+            {children}
+          </WalletProvider>
         </SuiClientProvider>
       </QueryClientProvider>
     </SuiLinkContext.Provider>
