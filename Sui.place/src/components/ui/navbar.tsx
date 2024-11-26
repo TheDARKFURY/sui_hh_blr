@@ -1,12 +1,17 @@
 "use client";
-
 import React, { ReactNode, use, useEffect, useState } from "react";
 import { Menu, MenuIcon, SearchIcon, ShoppingCartIcon, X } from "lucide-react";
 import StoreDashboardSheet from "../buttons/store-dashboard-sheet";
 import { Button } from "./button";
 import Link from "next/link";
 import { Input } from "./input";
-
+import {
+  ConnectButton,
+  useCurrentAccount,
+  useSignAndExecuteTransaction,
+  
+} from "@mysten/dapp-kit";
+import { coinWithBalance, Transaction } from '@mysten/sui/transactions';
 import {
   Dialog,
   DialogTrigger,
@@ -43,8 +48,60 @@ const NavBar = () => {
   const [alert, setAlert] = useState<ReactNode>(<React.Fragment />);
 
   const isConnected = false;
-  const address ="";
+  const address = "";
 
+  const { mutate: signAndExecuteTransaction } = useSignAndExecuteTransaction();
+  const currentAccount = useCurrentAccount();
+ 
+  
+  const deposit_tournament = async () => {
+    try {
+      const tx = new Transaction();
+      const coin = await coinWithBalance({ balance: 1000000000 });
+      tx.moveCall({
+        target:
+          "0xe41824362e8338420833f6927ec6af7a67de8547add6410dec341b1bdee101c6::treasury::deposit_private_room",
+
+        typeArguments: ["0x2::sui::SUI"],
+
+        arguments: [
+          tx.object(
+            "0xc32def673f0eedef66f348035dc062d05360ebf655f996358a86aaa20813c0b9"
+          ),
+          tx.object(
+            "0x676b89d0c59001ac6c36d50bbecf6035a84ae56876f76519ebcc6595fa3b3c10"
+          ),
+          tx.object(coin),
+        ],
+      });
+      tx.setSender(currentAccount!.address);
+
+      const response = await signAndExecuteTransaction(
+        {
+          transaction: tx,
+       
+        },
+
+        {
+          onSuccess: (result:any) => {
+            console.log("executed transaction", result);
+          },
+          onError: (error:any) => {
+            console.log("error", error);
+          },
+        }
+      );
+      let depositAmount = JSON.parse(localStorage.getItem("deposit"));
+      console.log("depositAmount", depositAmount);
+      if (depositAmount) {
+        depositAmount = depositAmount + 1000000000;
+        localStorage.setItem("desposit", JSON.stringify(depositAmount));
+      }
+
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,19 +110,6 @@ const NavBar = () => {
     // setIsAuthOpen(false);
     setLoginEmail("");
     setLoginPassword("");
-
-    // const login = async () => {
-    //   await fetch(`${FASTAPI_URL}/login`, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       email: loginEmail,
-    //       password: loginPassword,
-    //     }),
-    //   });
-    // };
   };
 
   const handleAuthWindow = () => {
@@ -162,14 +206,13 @@ const NavBar = () => {
                 >
                   Games
                 </Link>
-                
+
                 <Link
                   href="/nft-mint"
                   className="text-muted-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Communities
                 </Link>
-            
               </div>
             </div>
             <div className="flex items-center space-x-4">
@@ -183,7 +226,6 @@ const NavBar = () => {
                   <Button variant="outline" size="icon">
                     <SearchIcon className="h-4 w-4" />
                   </Button>
-                  
                 </div>
               </div>
               <DropdownMenu>
@@ -212,18 +254,18 @@ const NavBar = () => {
                     ))}
                     <div className="border-t mt-4 pt-4">
                       <div className="flex justify-between font-semibold">
-                        <p>Total:</p>
+                        <p>Deposit Amount:</p>
                         <p>
-                          $TRX
-                          {cart
-                            .reduce((total, item) => total + item.price, 0)
-                            .toFixed(2)}
+                          {localStorage.getItem("deposit") ? 10 : 10000} Mist
                         </p>
                       </div>
                     </div>
-                    <a href="/checkout">
-                      <Button className="w-full mt-4">Checkout</Button>
-                    </a>
+                    
+                      <Button onClick={async ()=>{
+                        await deposit_tournament("0x783b3ab2755c6c2686370993f8925daf222fac4252354b37d1972cefe099085c",
+                        "0x676b89d0c59001ac6c36d50bbecf6035a84ae56876f76519ebcc6595fa3b3c10")
+                      }} className="w-full mt-4">Deposit</Button>
+                    
                   </div>
                 </DropdownMenuContent>
               </DropdownMenu>

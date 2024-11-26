@@ -62,6 +62,9 @@ export default function TronLinkCard() {
                           setSignature(result.signature),
                       }
                     );
+                    localStorage.setItem("username", name);
+                    localStorage.setItem("signature", signature);
+                    localStorage.setItem("deposit", "0");
                   }}
                   className="rounded-lg bg-blue-600 py-3 font-bold text-white"
                 >

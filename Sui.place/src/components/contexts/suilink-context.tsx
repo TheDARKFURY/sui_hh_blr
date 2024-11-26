@@ -5,19 +5,15 @@ import {
   SuiClientProvider,
   WalletProvider,
 } from "@mysten/dapp-kit";
+
 import "@mysten/dapp-kit/dist/index.css";
-import { getFullnodeUrl, type SuiClientOptions } from "@mysten/sui/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { registerStashedWallet } from "@mysten/zksend";
 
 const { networkConfig } = createNetworkConfig({
-  mainnet: { url: getFullnodeUrl("mainnet") },
+  testnet: { url: "https://rpc-testnet.suiscan.xyz/" },  
 });
-const queryClient = new QueryClient();
 
-const connect = registerStashedWallet("Baskt", {
-  origin: "https://getstashed.com",
-});
+const queryClient = new QueryClient();
 
 interface SuiLinkContextType {
   isConnected: boolean;
@@ -54,7 +50,7 @@ export const SuiLinkProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <SuiLinkContext.Provider value={{ isConnected, address, setConnection }}>
       <QueryClientProvider client={queryClient}>
-        <SuiClientProvider networks={networkConfig} defaultNetwork="mainnet">
+        <SuiClientProvider networks={networkConfig} defaultNetwork="testnet">
           <WalletProvider
             autoConnect={true}
             stashedWallet={{
