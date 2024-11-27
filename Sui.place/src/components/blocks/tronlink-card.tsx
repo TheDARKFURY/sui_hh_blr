@@ -46,7 +46,7 @@ export default function TronLinkCard() {
                       className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600"
                     >
                       {" "}
-                      Enter Your Gamer Name{" "}
+                      Enter Your Name{" "}
                     </label>
                   </div>
                 </div>

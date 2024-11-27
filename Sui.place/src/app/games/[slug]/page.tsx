@@ -6,7 +6,7 @@ import NavBar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import { useGameProducts } from "@/components/contexts/developer-game-products-context";
 import Roulette from "@/components/Roulette";
-
+import toast from "react-hot-toast";
 export default function GameDetailsPage({
   params,
 }: {
@@ -17,6 +17,12 @@ export default function GameDetailsPage({
   const [tails, setTails] = useState(0);
   const [isFlipping, setIsFlipping] = useState(false);
   const [animation, setAnimation] = useState("");
+  const [yesAmount, setYesAmount] = useState(0);
+  const [noAmount, setNoAmount] = useState(0);
+
+  const totalAmount = yesAmount + noAmount;
+  const yesPercentage = totalAmount > 0 ? (yesAmount / totalAmount) * 100 : 0;
+  const noPercentage = totalAmount > 0 ? (noAmount / totalAmount) * 100 : 0;
 
   const handleFlip = () => {
     if (isFlipping) return;
@@ -71,32 +77,64 @@ export default function GameDetailsPage({
 
                   <p className="mt-4">
                     <span className="text-gray-400">Yes Invested:</span>{" "}
-                    <span className="text-gray-800 font-bold">$1,000,000</span>
+                    <span className="text-gray-800 font-bold">
+                      Mist {yesAmount}
+                    </span>
                   </p>
 
                   <p className="mt-4">
                     <span className="text-gray-400">Down Invested:</span>{" "}
-                    <span className="text-gray-800 font-bold">$1,000,000</span>
+                    <span className="text-gray-800 font-bold">
+                      Mist {noAmount}
+                    </span>
+                  </p>
+
+                  <p className="mt-4">
+                    <span className="text-gray-400">Bet Amount:</span>{" "}
+                    <span className="text-gray-800 font-bold"></span>
                   </p>
 
                   <div className="mt-4 flex w-full items-center text-xs text-gray-400">
                     UP
                     <div className="ml-4 h-4 overflow-hidden rounded-md bg-gray-100 w-full">
-                      <div className="h-full w-3/5 bg-green-400"></div>
+                      <div
+                        style={{ width: `${yesPercentage}%` }}
+                        className="h-full bg-green-400"
+                      ></div>
                     </div>
                   </div>
 
                   <div className="mt-4 flex w-full items-center text-xs text-gray-400">
                     NO
                     <div className="ml-4 h-4  overflow-hidden rounded-md bg-gray-100 w-full">
-                      <div className="h-full w-2/5 bg-red-400"></div>
+                      <div
+                        style={{ width: `${noPercentage}%` }}
+                        className="h-full bg-red-400"
+                      ></div>
                     </div>
                   </div>
-
                 </div>
 
                 <div className="mt-8 flex flex-col items-center justify-center rounded-md border border-gray-100 bg-white px-4 pt-3 pb-6 shadow-lg">
-                  <div className="px-2 py-2 w-20 h-20 text-xl rounded-full bg-green-400 shadow-lg uppercase cursor-pointer flex justify-center items-center font-bold">
+                  <div
+                    onClick={() => {
+                      let depositAmount = JSON.parse(
+                        localStorage.getItem("deposit")
+                      );
+                      if (depositAmount) {
+                        depositAmount = depositAmount - 1000000;
+                        setYesAmount(yesAmount + 1000000);
+                        localStorage.setItem(
+                          "deposit",
+                          JSON.stringify(depositAmount)
+                        );
+                        toast.success("Bet placed successfully");
+                      } else {
+                        toast.error("Insufficient balance");
+                      }
+                    }}
+                    className="px-2 py-2 w-20 h-20 text-xl rounded-full bg-green-400 shadow-lg uppercase cursor-pointer flex justify-center items-center font-bold"
+                  >
                     Up{" "}
                   </div>
 
@@ -105,10 +143,8 @@ export default function GameDetailsPage({
                       <div className="inline-block rounded-full  bg-emerald-200 p-2 text-emerald-500">
                         <img src="https://assets.coingecko.com/coins/images/26375/standard/sui-ocean-square.png?1727791290" />
                       </div>
-                     
-                      <p className="text-sm font-bold text-gray-500">
-                        Price
-                      </p>
+
+                      <p className="text-sm font-bold text-gray-500">Price</p>
                       <p className="text-4xl text-gray-800 font-bold">
                         3.30000$
                       </p>
@@ -132,7 +168,25 @@ export default function GameDetailsPage({
                     </div>
                   </div>
 
-                  <div className="px-2 py-2 w-20 h-20 text-xl  rounded-full bg-red-400 items-center shadow-lg mt-4 cursor-pointer flex justify-center font-bold">
+                  <div
+                    onClick={() => {
+                      let depositAmount = JSON.parse(
+                        localStorage.getItem("deposit")
+                      );
+                      if (depositAmount) {
+                        depositAmount = depositAmount - 1000000;
+                        setNoAmount(noAmount + 1000000);
+                        localStorage.setItem(
+                          "deposit",
+                          JSON.stringify(depositAmount)
+                        );
+                        toast.success("Bet placed successfully");
+                      } else {
+                        toast.error("Insufficient balance");
+                      }
+                    }}
+                    className="px-2  py-2 w-20 h-20 text-xl  rounded-full bg-red-400 items-center shadow-lg mt-4 cursor-pointer flex justify-center font-bold"
+                  >
                     Down{" "}
                   </div>
                 </div>
