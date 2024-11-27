@@ -77,41 +77,7 @@ import { useGameProducts } from "../contexts/developer-game-products-context";
 
 export default function Dashboard() {
   const { products, addProduct } = useGameProducts();
-  // const [products, setProducts] = useState<Game[]>([
-  //   {
-  //     id: "minty-quest",
-  //     title: "Minty Quest",
-  //     price: 49.99,
-  //     genre: "RPG",
-  //     description:
-  //       "Embark on a quest to collect rare NFTs and mint powerful items in this epic RPG.",
-  //     nftRewards: [
-  //       {
-  //         name: "Minted Blade",
-  //         description:
-  //           "A sword minted from the finest materials in the blockchain.",
-  //       },
-  //     ],
-  //     images: [],
-  //     tags: ["Fantasy", "Multiplayer", "NFT"],
-  //     rating: 4.8,
-  //     systemRequirements: {
-  //       os: "Windows 10",
-  //       processor: "Intel i7",
-  //       memory: "16 GB RAM",
-  //       graphics: "NVIDIA RTX 2060",
-  //       storage: "60 GB available space",
-  //     },
-  //     developerData: {
-  //       name: "Hitsune",
-  //       wallet_address: "TRX1A23abcDEF456XYZ789",
-  //     },
-  //     game_id: "6704534960aa82bac918f634",
-  //     createdAt: "2024-10-08T04:31:53.955000",
-  //     updatedAt: "2024-10-08T04:31:53.955000",
-  //     reviews: [],
-  //   },
-  // ]);
+
 
   const [newProduct, setNewProduct] = useState<Game>({
     id: "",
@@ -297,7 +263,7 @@ export default function Dashboard() {
                   className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
                 >
                   <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
-                  <span className="sr-only">MintyPlay</span>
+                  <span className="sr-only">Sui.Discover</span>
                 </Link>
                 <Link
                   href="#"

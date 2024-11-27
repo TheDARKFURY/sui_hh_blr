@@ -60,51 +60,49 @@ export default function GameDetailsPage({
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex gap-8 justify-center">
-          <div>
-            <h1 className="text-3xl font-bold text-primary mb-2">
-              {game.title}
-            </h1>
-            <Badge variant="secondary" className="mb-4">
-              Coin FLip
-            </Badge>
-            
-            <div className="container-coin">
-              
-              <div className={`coin ${animation}`} id="coin">
-                <div className="heads">
-                  <img
-                    src="https://live.staticflickr.com/227/1491049183_4fe2ede120_w.jpg"
-                    alt="Heads"
-                    
-                  />
+          {params.slug === "1" && (
+            <div>
+              <h1 className="text-3xl font-bold text-primary mb-2">
+                {game.title}
+              </h1>
+              <Badge variant="secondary" className="mb-4">
+                Coin FLip
+              </Badge>
+
+              <div className="container-coin">
+                <div className={`coin ${animation}`} id="coin">
+                  <div className="heads">
+                    <img
+                      src="https://live.staticflickr.com/227/1491049183_4fe2ede120_w.jpg"
+                      alt="Heads"
+                    />
+                  </div>
+                  <div className="tails">
+                    <img
+                      src="https://media.istockphoto.com/id/486748452/vector/united-states-currency-nickel-coin.jpg?s=612x612&w=0&k=20&c=9ey7MC3ayRWgpO9vqhF5cfYRcXelYvhkNisNyIfTUJE="
+                      alt="Tails"
+                    />
+                  </div>
                 </div>
-                <div className="tails">
-                  <img
-                    src="https://media.istockphoto.com/id/486748452/vector/united-states-currency-nickel-coin.jpg?s=612x612&w=0&k=20&c=9ey7MC3ayRWgpO9vqhF5cfYRcXelYvhkNisNyIfTUJE="
-                    alt="Tails"
-                    
-                  />
+                <div className="stats flex gap-12 font-bold text-xl">
+                  <p>Heads: {heads}</p>
+                  <p>Tails: {tails}</p>
                 </div>
-              </div>
-              <div className="stats flex gap-12 font-bold text-xl">
-                <p>Heads: {heads}</p>
-                <p>Tails: {tails}</p>
-              </div>
-              <div className="buttons font-bold text-xl">
-                <button
-                  id="flip-button"
-                  onClick={handleFlip}
-                  disabled={isFlipping}
-                >
-                  Flip Coin
-                </button>
-                <button id="reset-button" onClick={handleReset}>
-                  Reset
-                </button>
+                <div className="buttons font-bold text-xl">
+                  <button
+                    id="flip-button"
+                    onClick={handleFlip}
+                    disabled={isFlipping}
+                  >
+                    Flip Coin
+                  </button>
+                  <button id="reset-button" onClick={handleReset}>
+                    Reset
+                  </button>
+                </div>
               </div>
             </div>
-          
-          </div>
+          )}
         </div>
       </main>
       <Footer />

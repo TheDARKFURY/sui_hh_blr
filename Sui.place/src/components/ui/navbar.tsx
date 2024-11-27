@@ -11,6 +11,7 @@ import {
   useSignAndExecuteTransaction,
   
 } from "@mysten/dapp-kit";
+import toast, { Toaster } from 'react-hot-toast';
 import { coinWithBalance, Transaction } from '@mysten/sui/transactions';
 import {
   Dialog,
@@ -46,6 +47,7 @@ const NavBar = () => {
   const [isLinkWalletOpen, setIsLinkWalletOpen] = useState(false);
   const [navCart, setCart] = useState<typeof cart>([]);
   const [alert, setAlert] = useState<ReactNode>(<React.Fragment />);
+  const [depositAmount, setDepositAmount] = useState(0);
 
   const isConnected = false;
   const address = "";
@@ -55,6 +57,7 @@ const NavBar = () => {
  
   
   const deposit_tournament = async () => {
+    let id = toast.loading("Depositing...");
     try {
       const tx = new Transaction();
       const coin = await coinWithBalance({ balance: 1000000000 });
@@ -92,14 +95,16 @@ const NavBar = () => {
         }
       );
       let depositAmount = JSON.parse(localStorage.getItem("deposit"));
-      console.log("depositAmount", depositAmount);
       if (depositAmount) {
         depositAmount = depositAmount + 1000000000;
-        localStorage.setItem("desposit", JSON.stringify(depositAmount));
+        localStorage.setItem("deposit", JSON.stringify(depositAmount));
       }
+
+      toast.success("Deposited 1 SUI", { id });
 
     } catch (error) {
       console.log("error", error);
+      toast.error("Error depositing", { id });
     }
   };
 
@@ -236,7 +241,7 @@ const NavBar = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-80">
                   <div className="p-4">
-                    <h3 className="font-semibold text-lg mb-2">Your Cart</h3>
+                   
                     {navCart.map((item) => (
                       <div
                         key={item.id}
@@ -256,11 +261,18 @@ const NavBar = () => {
                       <div className="flex justify-between font-semibold">
                         <p>Deposit Amount:</p>
                         <p>
-                          {localStorage.getItem("deposit") ? 10 : 10000} Mist
+                          {JSON.parse(localStorage.getItem("deposit")) ? JSON.parse(localStorage.getItem("deposit")) : 10000} Mist
                         </p>
                       </div>
                     </div>
-                    
+                      <input
+
+                        type="number"
+                        value={depositAmount}
+                        onChange={(e) => setDepositAmount(e.target.value)}
+                        className="w-full mt-4 p-2 border border-gray-300 rounded-md"
+                      />
+                      
                       <Button onClick={async ()=>{
                         await deposit_tournament("0x783b3ab2755c6c2686370993f8925daf222fac4252354b37d1972cefe099085c",
                         "0x676b89d0c59001ac6c36d50bbecf6035a84ae56876f76519ebcc6595fa3b3c10")

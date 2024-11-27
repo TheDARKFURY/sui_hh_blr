@@ -39,52 +39,22 @@ export const GameProductsProvider: React.FC<{ children: ReactNode }> = ({
     {
       id: "1",
       title: "Coin Flip",
-      image: "/images/crypto-legends.jpg",
+      image: "https://www.kundanrefinery.com/pub/media/catalog/product/cache/a6819a77997e6f5ec84977f1af72369f/k/r/kr337-a_1.jpg",
     },
     {
       id: "2",
-      title: "Blockchain Raiders",
-      image: "/images/blockchain-raiders.jpg",
+      title: "Price Prediction",
+      image: "https://academy-public.coinmarketcap.com/optimized-uploads/a189e72d71ad447b985f6d8ad225ba5a.jpeg",
     },
     {
       id: "3",
-      title: "DeFi Warriors",
-      image: "/images/defi-warriors.jpg",
+      title: "Roulette",
+      image: "https://m.media-amazon.com/images/I/61u26l97ssL._UF1000,1000_QL80_.jpg",
     },
     {
       id: "4",
-      title: "Metaverse Explorers",
-      image: "/images/metaverse-explorers.jpg",
-    },
-    {
-      id: "5",
-      title: "Token Tactics",
-      image: "/images/token-tactics.jpg",
-    },
-    {
-      id: "6",
-      title: "NFT Racing League",
-      image: "/images/nft-racing-league.jpg",
-    },
-    {
-      id: "7",
-      title: "Staking Kingdoms",
-      image: "/images/staking-kingdoms.jpg",
-    },
-    {
-      id: "8",
-      title: "ZK Battles",
-      image: "/images/zk-battles.jpg",
-    },
-    {
-      id: "9",
-      title: "CrossChain Heroes",
-      image: "/images/crosschain-heroes.jpg",
-    },
-    {
-      id: "10",
-      title: "Layer Zero Adventures",
-      image: "/images/layer-zero-adventures.jpg",
+      title: "Snake Run",
+      image: "https://m.media-amazon.com/images/I/81t8t9TyYLL.png",
     },
   ]);
   

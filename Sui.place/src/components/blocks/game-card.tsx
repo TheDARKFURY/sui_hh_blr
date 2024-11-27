@@ -40,13 +40,13 @@ export function GameCard({ game }: GameCardProps) {
       <CardContent>
         <div className="aspect-w-16 aspect-h-9 w-full overflow-hidden rounded-lg bg-muted mb-4">
           <img
-            src="https://www.kundanrefinery.com/pub/media/catalog/product/cache/a6819a77997e6f5ec84977f1af72369f/k/r/kr337-a_1.jpg"
+            src={game.image}
             alt={game.title}
             className="h-full w-full object-cover object-center"
           />
         </div>
         <div className="flex justify-between items-center mb-2">
-          <p className="text-2xl font-bold text-primary">$Sui 12</p>
+          <p className="text-md font-bold text-primary">play.earn.make.comunitties</p>
         </div>
       </CardContent>
       <CardFooter>
