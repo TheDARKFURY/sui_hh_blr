@@ -158,3 +158,65 @@ button:disabled {
   cursor: not-allowed;
   background-color: #ccc;
 }
+
+.roulette-table {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.grid-cl {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.bet-number, .bet-sector {
+  margin: 5px;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.bet-number:hover, .bet-sector:hover {
+  background-color: #ddd;
+}
+
+.bet-number.green {
+  background-color: #008000; /* Green for 0 */
+  color: white;
+}
+
+.bet-number.red {
+  background-color: #ff0000; /* Red numbers */
+  color: white;
+}
+
+.bet-number.black {
+  background-color: #000000; /* Black numbers */
+  color: white;
+}
+
+.bet-number.even {
+  background-color: #f1f1f1; /* Light color for even numbers */
+}
+
+.bet-number.odd {
+  background-color: #e0e0e0; /* Slightly darker for odd numbers */
+}
+
+.bet-sector {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+
+
+

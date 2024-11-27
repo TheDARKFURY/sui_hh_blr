@@ -50,7 +50,7 @@ export function GameCard({ game }: GameCardProps) {
         </div>
       </CardContent>
       <CardFooter>
-        <Button className="w-full">Play</Button>
+        <a href={`/games/${game.id}`}><Button className="w-full">Play</Button></a>
       </CardFooter>
     </Card>
   );
