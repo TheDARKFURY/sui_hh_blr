@@ -60,7 +60,7 @@ export default function GameDetailsPage({
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex gap-8 justify-center">
-          {params.slug === "3" && <Roulette/>}
+          {params.slug === "3" && <Roulette />}
           {params.slug === "2" && (
             <>
               <div className="my-10 w-1/3">
@@ -68,29 +68,73 @@ export default function GameDetailsPage({
                   <strong className="block text-lg font-medium">
                     Pool Analytics
                   </strong>
-                  <div className="mt-4 flex items-center text-xs text-gray-400">
+
+                  <p className="mt-4">
+                    <span className="text-gray-400">Yes Invested:</span>{" "}
+                    <span className="text-gray-800 font-bold">$1,000,000</span>
+                  </p>
+
+                  <p className="mt-4">
+                    <span className="text-gray-400">Down Invested:</span>{" "}
+                    <span className="text-gray-800 font-bold">$1,000,000</span>
+                  </p>
+
+                  <div className="mt-4 flex w-full items-center text-xs text-gray-400">
                     UP
-                    <div className="ml-4 h-4 w-36 overflow-hidden rounded-md bg-gray-100 sm:w-56">
-                      <div className="h-full w-3/5 bg-yellow-200"></div>
+                    <div className="ml-4 h-4 overflow-hidden rounded-md bg-gray-100 w-full">
+                      <div className="h-full w-3/5 bg-green-400"></div>
                     </div>
                   </div>
 
-                  <div className="mt-4 flex items-center text-xs text-gray-400">
+                  <div className="mt-4 flex w-full items-center text-xs text-gray-400">
                     NO
-                    <div className="ml-4 h-4 w-36 overflow-hidden rounded-md bg-gray-100 sm:w-56">
-                      <div className="h-full w-2/5 bg-gray-800"></div>
+                    <div className="ml-4 h-4  overflow-hidden rounded-md bg-gray-100 w-full">
+                      <div className="h-full w-2/5 bg-red-400"></div>
                     </div>
                   </div>
+
                 </div>
 
-                <div className="mt-8 flex flex-col items-start rounded-md border border-gray-100 bg-white px-4 pt-3 pb-6 shadow-lg">
-                 <div className="px-2 py-2 w-full bg-green-400 rounded-md shadow-lg cursor-pointer flex justify-center font-bold">Up </div>
+                <div className="mt-8 flex flex-col items-center justify-center rounded-md border border-gray-100 bg-white px-4 pt-3 pb-6 shadow-lg">
+                  <div className="px-2 py-2 w-20 h-20 text-xl rounded-full bg-green-400 shadow-lg uppercase cursor-pointer flex justify-center items-center font-bold">
+                    Up{" "}
+                  </div>
 
-                 <div className="px-2 py-2 mt-4 rounded-md w-full h-[40%] border">
+                  <div className="px-2 py-2 mt-4 rounded-md w-full h-[40%] border shadow-lg">
+                    <div className="max-w-md rounded-lg px-6 pt-6 pb-10 ">
+                      <div className="inline-block rounded-full  bg-emerald-200 p-2 text-emerald-500">
+                        <img src="https://assets.coingecko.com/coins/images/26375/standard/sui-ocean-square.png?1727791290" />
+                      </div>
+                     
+                      <p className="text-sm font-bold text-gray-500">
+                        Price
+                      </p>
+                      <p className="text-4xl text-gray-800 font-bold">
+                        3.30000$
+                      </p>
+                      <span className="float-right rounded-full bg-rose-100 px-1 text-sm font-medium text-rose-600">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="inline h-4 w-4 pb-0.5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M17 13l-5 5m0 0l-5-5m5 5V6"
+                          />
+                        </svg>
+                        3%
+                      </span>
+                    </div>
+                  </div>
 
-                 </div>
-                  
-                 <div className="px-2 py-2 w-full bg-red-400 rounded-md shadow-lg mt-4 cursor-pointer flex justify-center font-bold">Down </div>
+                  <div className="px-2 py-2 w-20 h-20 text-xl  rounded-full bg-red-400 items-center shadow-lg mt-4 cursor-pointer flex justify-center font-bold">
+                    Down{" "}
+                  </div>
                 </div>
               </div>
             </>

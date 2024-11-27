@@ -6,7 +6,8 @@
 
 body {
   /* font-family: "Rubik Glitch", serif; */
-  font-family: "Edu AU VIC WA NT Guides", cursive;
+  /* font-family: "Edu AU VIC WA NT Guides", cursive; */
+  font-family: sans-serif;
 }
 
 @layer utilities {
